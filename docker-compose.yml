@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  predict-api:
+    build: .
+    environment:
+      DB_HOST: 172.17.0.1
+      DB_PORT: 5432
+      DB_USER: 'culebron'
+      DB_PASSWORD: 'culebron'
+      DB_NAME: 'dump'
+      S3_BUCKET: eta-model-airflow
+      S3_PATH: eta_prediction/model1.bin
+      S3_PROFILE: delivery-eta-test
+      AWS_ACCESS_KEY: ${AWS_ACCESS_KEY:-}
+      AWS_SECRET_KEY: ${AWS_SECRET_KEY:-}
+      AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN:-}
+      volumes:
+        ./api:/code 
+      network_mode: host
